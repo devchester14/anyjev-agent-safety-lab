@@ -1,0 +1,64 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "anyjev-decision-lab"
+version = "0.1.0"
+description = "Use AnyJev with a local LLM, with a reproducible agent-safety case study."
+readme = "README.md"
+requires-python = ">=3.10,<3.14"
+license = { file = "LICENSE" }
+authors = [{ name = "AnyJev Decision Lab contributors" }]
+keywords = ["anyjev", "local-llm", "agent-safety", "decision-models", "evaluation"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+]
+dependencies = ["anyjev>=0.3.0,<0.4.0"]
+
+[project.optional-dependencies]
+hf = ["anyjev[hf]>=0.3.0,<0.4.0"]
+dev = [
+  "build>=1.2.2",
+  "detect-secrets>=1.5.0",
+  "mypy>=1.15.0",
+  "pre-commit>=4.2.0",
+  "pytest>=8.3.5",
+  "pytest-cov>=6.1.0",
+  "ruff>=0.11.0",
+]
+
+[project.scripts]
+anyjev-decision-lab = "anyjev_agent_safety_lab.cli:main"
+# Compatibility alias for the repository's original name.
+anyjev-safety-lab = "anyjev_agent_safety_lab.cli:main"
+
+[project.urls]
+Repository = "https://github.com/devchester14/anyjev-agent-safety-lab"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/anyjev_agent_safety_lab"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+files = ["src", "tests"]
+
+[tool.pytest.ini_options]
+addopts = "-q --strict-markers"
+testpaths = ["tests"]

@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v7
+        with:
+          python-version: "3.12"
+          enable-cache: true
+      - run: uv sync --extra dev --frozen
+      - run: uv run ruff format --check .
+      - run: uv run ruff check .
+      - run: uv run mypy
+      - run: uv run pytest --cov=anyjev_agent_safety_lab --cov-report=term-missing
+      - run: uv build
+      - run: uv run pre-commit run detect-secrets --all-files
+      - name: Exercise deterministic CI fixture (never published as a result)
+        env:
+          SOURCE_DATE_EPOCH: "1792108800"
+        run: |
+          uv run anyjev-decision-lab benchmark --backend fixture --output reports/ci
+          uv run anyjev-decision-lab report --decisions reports/ci/decisions.json --output reports/ci
+          uv run anyjev-decision-lab verify --decisions reports/ci/decisions.json --report reports/ci/report.json

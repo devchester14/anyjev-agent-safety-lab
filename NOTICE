@@ -1,0 +1,8 @@
+AnyJev Decision Lab
+Copyright 2026 AnyJev Decision Lab contributors
+
+This independent local-LLM capability demo and benchmark uses AnyJev through its public Python API.
+AnyJev is copyright its respective contributors and is distributed under
+the Apache License 2.0: https://github.com/nokia-applied-research/AnyJev
+
+Qwen model weights are not included and remain subject to their own licenses.

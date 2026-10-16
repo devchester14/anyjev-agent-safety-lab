@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+title: AnyJev Decision Lab
+message: If you use this local-LLM capability demo or benchmark, cite this repository and AnyJev.
+type: software
+version: 0.1.0
+date-released: 2026-10-16
+license: Apache-2.0
+repository-code: https://github.com/devchester14/anyjev-agent-safety-lab
+references:
+  - type: software
+    title: "AnyJev: Turn any LLM into a Jev-style decision model"
+    authors:
+      - family-names: Zhang
+        given-names: Jiamu
+      - family-names: Yang
+        given-names: Tianze
+      - family-names: Shi
+        given-names: Yucheng
+      - family-names: Wu
+        given-names: Liang
+    year: 2026
+    url: https://github.com/nokia-applied-research/AnyJev
